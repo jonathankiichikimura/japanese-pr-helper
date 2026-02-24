@@ -13,4 +13,16 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :user_applications, only: [:index, :show, :new, :create] do
+    resources :chats, only: [:new, :create]
+  end
+
+  resources :user, only: [:show, :edit, :update, :destroy]
+
+  resources :chats, only: [:show, :destroy] do
+    resources :messages, only: [:create]
+  end
+
+  get "chats/:id/download", to: "chats#download", as: :download_chat
+  get "chats/:id/create_document", to: "chats#create_document", as: :create_document
 end
