@@ -3,7 +3,10 @@ class ChatsController < ApplicationController
     @user_application = UserApplication.find(params[:user_application_id])
     # @chat = @user_application.chats.first
     @chats = @user_application.chats
-    @chat = Chat.find(params[:id])
+    @chat = @user_application.chats.find_by(id: params[:id])
+    if @chat.nil? # rubocop:disable Style/IfUnlessModifier
+      redirect_to user_application_chat_path(@user_application, @chats.first)
+    end
     @newchat = Chat.new
   end
 
@@ -16,6 +19,13 @@ class ChatsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @user_application = UserApplication.find(params[:user_application_id])
+    chat = Chat.find(params[:id])
+    chat.destroy
+    redirect_to user_application_chat_path(@user_application)
   end
 
   private
