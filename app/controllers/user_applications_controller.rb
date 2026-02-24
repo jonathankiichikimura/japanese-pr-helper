@@ -1,4 +1,8 @@
 class UserApplicationsController < ApplicationController
+  def index
+    @user_applications = current_user.user_applications
+  end
+
   def new
     @user_application = UserApplication.new
   end
