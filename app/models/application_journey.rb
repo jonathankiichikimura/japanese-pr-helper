@@ -1,5 +1,5 @@
 class ApplicationJourney < ApplicationRecord
-  enum application_road: { married: 1, long_term: 2, work: 3, highly: 4, special: 5 }
+  enum :application_road, { married: 1, long_term: 2, work: 3, highly: 4, special: 5 }
 
   validates :application_road, presence: true
 
