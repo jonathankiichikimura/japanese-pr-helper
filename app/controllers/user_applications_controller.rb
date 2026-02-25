@@ -12,7 +12,7 @@ class UserApplicationsController < ApplicationController
     @user_application.user = current_user
     if @user_application.save
       populate_chats(@user_application)
-      redirect_to user_application_chats_path(@user_application, @user_application.chats.first)
+      redirect_to user_application_chat_path(@user_application, @user_application.chats.first)
     else
       render :new, status: :unprocessable_entity
     end
