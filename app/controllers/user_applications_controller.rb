@@ -94,9 +94,40 @@ class UserApplicationsController < ApplicationController
       ]
     when "highly1b"
       titles = [
+        # shared
         "Application Form (永住許可申請書)",
+        "Photograph (写真)",
+        "Proof of Relationships (身分関係を証明する書類)",
+        "Residence Certificate (住民票)",
+        "Employment Certificate (職業を証明する資料)",
+        "Passport or Certificate of Residence Status (パスポート（旅券）又は在留資格証明書)",
+        "Residence Card (在留カード)",
+        "Letter of Guarantee (身元保証書)",
+        "Acknowledgement Form (了解所)",
         "Taxation Certificates (所得及び納税状況を証明する資料)",
         "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+
+        # # if married
+        # "List of Relatives (親族一覧表)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if long_term
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if work
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # highly1b specific
         "Highly Skilled Professional Points Calculation Table (高度専門職ポイント計算表)",
         "Proof for Points Calculation (ポイント計算の各項目に関する疎明資料)"
       ]
@@ -121,9 +152,40 @@ class UserApplicationsController < ApplicationController
       ]
     when "highly2b"
       titles = [
+        # shared
         "Application Form (永住許可申請書)",
+        "Photograph (写真)",
+        "Proof of Relationships (身分関係を証明する書類)",
+        "Residence Certificate (住民票)",
+        "Employment Certificate (職業を証明する資料)",
+        "Passport or Certificate of Residence Status (パスポート（旅券）又は在留資格証明書)",
+        "Residence Card (在留カード)",
+        "Letter of Guarantee (身元保証書)",
+        "Acknowledgement Form (了解所)",
         "Taxation Certificates (所得及び納税状況を証明する資料)",
         "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+
+        # # if married
+        # "List of Relatives (親族一覧表)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if long_term
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if work
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # highly2b specific
         "Highly Skilled Professional Points Calculation Table (高度専門職ポイント計算表)",
         "Proof for Points Calculation (ポイント計算の各項目に関する疎明資料)"
       ]
@@ -146,9 +208,40 @@ class UserApplicationsController < ApplicationController
       ]
     when "special2"
       titles = [
+        # shared
         "Application Form (永住許可申請書)",
+        "Photograph (写真)",
+        "Proof of Relationships (身分関係を証明する書類)",
+        "Residence Certificate (住民票)",
+        "Employment Certificate (職業を証明する資料)",
+        "Passport or Certificate of Residence Status (パスポート（旅券）又は在留資格証明書)",
+        "Residence Card (在留カード)",
+        "Letter of Guarantee (身元保証書)",
+        "Acknowledgement Form (了解所)",
         "Taxation Certificates (所得及び納税状況を証明する資料)",
         "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+
+        # # if married
+        # "List of Relatives (親族一覧表)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if long_term
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # # if work
+        # "Statement of Reasons (理由書)",
+        # "Taxation Certificates (所得及び納税状況を証明する資料)",
+        # "Pension and Health Insurance Payment Records (公的年金及び公的医療保険の保険料の納付状況を証明する資料)",
+        # "Proof of Assets (資産を証明する資料)",
+        # "Proof of Contributions to Japan (日本国への貢献に係る資料)",
+        # "Proof of Identity for Proxy (申請人以外の方の身分を証する文書)",
+
+        # special2 specific
         "Proof of Academic/Work History (学歴又は職歴を証する文書)",
         "Proof of Annual Income (年収を証する文書)"
       ]
