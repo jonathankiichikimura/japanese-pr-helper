@@ -1,0 +1,72 @@
+<div class="chat-main-container b-only d-flex">
+
+
+  <aside class="sidebar-container b-only">
+    <div class="username-container b-only">
+      <h3>
+        <%= link_to new_user_application_path do %><i class="fa-solid fa-file-circle-plus"></i><% end %>
+
+        <%= @chat.user_application.user.first_name %>
+        <%= @chat.user_application.user.last_name %>
+      </h3>
+      <h5>Chat ID: <%= @chat.id %></h5>
+      <p>
+        <strong>Application: </strong>
+        <%= @chat.user_application.title %>
+      </p>
+    </div>
+
+
+    <div class="new-chat-container b-only">
+      <%= simple_form_for [@user_application, @newchat],
+                          data: { turbo_method: :post } do |f| %>
+        <%= f.input :title,
+                    placeholder: "New Chat",
+                    label: false,
+                    wrapper: false %>
+        <%= f.button :submit, "+", class: "send_button" %>
+      <% end %>
+    </div>
+
+
+    <div id="chatboxs-container" class="chatboxs-container b-only" >
+    <% @chats.each do |chat| %>
+    <%= render "chat_row", chat: chat,
+                         user_application: @user_application %>
+  <% end %>
+</div>
+
+
+    <div class="setting b-only">
+      <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}%>
+    </div>
+
+
+  </aside>
+
+
+
+  <div class="message-details-container b-only">
+    <div class="top-container b-only text-center">
+      <%= @chat.title %>
+    </div>
+
+
+    <div class="messages-container b-only">
+      <div id="messages">
+      <% @chat.messages.order(:created_at).each do |message| %>
+        <div class="message b-only <%= message.role == 'user' ? 'right' : 'left' %>">
+          <%# <p> message.role  :</p> %>
+          <p> <%= message.content %></p>
+        </div>
+      <% end %>
+    </div>
+</div>
+
+    <div class="message-upload-container b-only">
+      Type:
+    </div>
+
+
+  </div>
+</div>

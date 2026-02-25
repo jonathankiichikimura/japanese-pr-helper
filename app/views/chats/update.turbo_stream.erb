@@ -1,0 +1,21 @@
+<%# https://turbo.hotwired.dev/reference/streams %>
+<turbo-stream action="remove" target="chat_<%= @chat.id %>"></turbo-stream>
+<%# Removes the element designated by the target dom id. %>
+<% if @chat.done %>
+  <turbo-stream action="append" target="chatboxs-container"> <%# Appends the content within the template tag to the container designated by the target dom id. %>
+    <template>
+      <%= render partial: "chat_row",
+                 formats: [:html],
+                 locals: { chat: @chat, user_application: @chat.user_application } %>
+    </template>
+  </turbo-stream>
+<% else %>
+<turbo-stream action="prepend" target="chatboxs-container">
+  <template>
+     <%= render partial: "chat_row",
+                formats: [:html],
+                locals: { chat: @chat,
+                user_application: @chat.user_application } %>
+  </template>
+</turbo-stream>
+<% end %>
