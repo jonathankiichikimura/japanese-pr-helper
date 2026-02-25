@@ -54,6 +54,7 @@ puts "Seeding test users, chats, and messages"
   end
 end
 
+puts "Finished putting #{User.count} user(s)"
 puts "Finished putting #{UserApplication.count} user application(s)"
 puts "Finished putting #{Chat.count} chat(s)"
 puts "Finished putting #{Message.count} message(s)"
