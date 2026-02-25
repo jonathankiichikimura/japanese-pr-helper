@@ -1,0 +1,20 @@
+<turbo-stream action="remove" target="chat_<%= @chat.id %>"></turbo-stream>
+
+<% if @chat.done %>
+  <turbo-stream action="append" target="chatboxs-container">
+    <template>
+      <%= render partial: "chat_row",
+                 formats: [:html],
+                 locals: { chat: @chat, user_application: @chat.user_application } %>
+    </template>
+  </turbo-stream>
+<% else %>
+<turbo-stream action="prepend" target="chatboxs-container">
+  <template>
+     <%= render partial: "chat_row",
+                formats: [:html],
+                locals: { chat: @chat,
+                user_application: @chat.user_application } %>
+  </template>
+</turbo-stream>
+<% end %>

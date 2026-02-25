@@ -11,14 +11,11 @@
 
 puts "Cleaning DB"
 User.destroy_all
-
-
 puts "Seeding DB"
 5.times do
   user = User.new(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-
     email: "email#{User.count}@domain.com",
     password: "123456"
   )

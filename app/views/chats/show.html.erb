@@ -1,15 +1,11 @@
-<p>
-  <strong>Created:</strong>
-  <%= l(@chat.created_at, format: :long) %>
-</p>
-
-<div class="chat-main-container b-only">
+<div class="chat-main-container b-only d-flex">
 
 
   <aside class="sidebar-container b-only">
     <div class="username-container b-only">
       <h3>
-        <%= link_to raw('<i class="fa-solid fa-file-circle-plus"></i>'),new_user_application_path %>
+        <%= link_to new_user_application_path do %><i class="fa-solid fa-file-circle-plus"></i><% end %>
+
         <%= @chat.user_application.user.first_name %>
         <%= @chat.user_application.user.last_name %>
       </h3>
@@ -28,27 +24,23 @@
         <%= f.input :title,
                     placeholder: "New Chat",
                     label: false,
-                    wrapper: false,
-                    input_html: { class: "form-input" } %>
+                    wrapper: false %>
         <%= f.button :submit, "+", class: "send_button" %>
       <% end %>
     </div>
 
 
-    <div class="chatboxs-container b-only">
-      <% @chats.each do |chat| %>
-        <div class="chatbox b-only">
-          <%= link_to chat.title, user_application_chat_path(@user_application, chat), class: "form_input" %>
-          <%= link_to  user_application_chat_path(@user_application, chat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-trash-can"></i>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <div id="chatboxs-container" class="chatboxs-container b-only" >
+    <% @chats.each do |chat| %>
+    <%= render partial: "chat_row",
+               locals: { chat: chat,
+                         user_application: @user_application } %>
+  <% end %>
+</div>
 
 
     <div class="setting b-only">
-      <p><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %></p>
+      <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}%>
     </div>
 
 
@@ -63,6 +55,7 @@
 
 
     <div class="messages-container b-only">
+      <div id="messages">
       <% @chat.messages.order(:created_at).each do |message| %>
         <div class="message b-only <%= message.role == 'user' ? 'right' : 'left' %>">
           <%# <p> message.role  :</p> %>
@@ -70,7 +63,7 @@
         </div>
       <% end %>
     </div>
-
+</div>
 
     <div class="message-upload-container b-only">
       Type:
