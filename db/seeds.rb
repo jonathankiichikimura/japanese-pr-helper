@@ -11,7 +11,6 @@
 
 puts "Cleaning DB"
 User.destroy_all
-
 puts "Seeding DB"
 5.times do
   user = User.new(

@@ -1,0 +1,22 @@
+<div id="chat_<%= chat.id %>" class="chatbox b-only <%= 'done' if chat.done %>">
+  <div class="chatbox-title">
+    <%= link_to chat.title, user_application_chat_path(user_application, chat), class: "text-decoration-none" %>
+  </div>
+
+  <div class="chatbox-controls">
+    <%= simple_form_for [user_application, chat], url: user_application_chat_path(user_application, chat), method:
+      :patch, data: { turbo: true } do |f| %>
+
+      <%= f.input :done,
+      as: :boolean,
+      label: false,
+      input_html: { onchange: "this.form.requestSubmit()" ,  class: "mx-3 d-block"} %>
+        <% end %>
+        <% if chat.done %>
+          <%= link_to user_application_chat_path(user_application, chat), data: { turbo_method: :delete,
+            turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          <% end %>
+  </div>
+</div>
