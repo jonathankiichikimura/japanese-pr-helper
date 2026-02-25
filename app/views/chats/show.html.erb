@@ -19,7 +19,6 @@
 
     <div class="new-chat-container b-only">
       <%= simple_form_for [@user_application, @newchat],
-                          remote: true,
                           data: { turbo_method: :post } do |f| %>
         <%= f.input :title,
                     placeholder: "New Chat",
@@ -32,9 +31,8 @@
 
     <div id="chatboxs-container" class="chatboxs-container b-only" >
     <% @chats.each do |chat| %>
-    <%= render partial: "chat_row",
-               locals: { chat: chat,
-                         user_application: @user_application } %>
+    <%= render "chat_row", chat: chat,
+                         user_application: @user_application %>
   <% end %>
 </div>
 
@@ -49,7 +47,7 @@
 
 
   <div class="message-details-container b-only">
-    <div class="top-container b-only">
+    <div class="top-container b-only text-center">
       <%= @chat.title %>
     </div>
 

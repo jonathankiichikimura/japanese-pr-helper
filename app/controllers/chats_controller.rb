@@ -26,13 +26,11 @@ class ChatsController < ApplicationController
 
   def update
     @chat = Chat.find(params[:id])
-    if @chat.update(done_params)
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_back(fallback_location: root_path) }
-      end
-    else
-      head :unprocessable_entity
+    return unless @chat.update(done_params)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back(fallback_location: root_path) }
     end
   end
 

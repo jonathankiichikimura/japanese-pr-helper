@@ -70,10 +70,6 @@
   background-color: #cccccc94;
 }
 
-.top-container {
-  text-align: center;
-}
-
 .chatboxs-container {
   display: flex;
   flex-direction: column;
@@ -94,19 +90,14 @@
     background-color: #cccccc98;
   }
 
+  .chatbox-controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
 }
 
-.chatbox .chatbox-controls {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-}
-
-.form_input {
-  text-decoration: none;
-}
-
-.message-upload-container {
+.chatbox .message-upload-container {
   position: absolute;
   height: 50px;
   bottom: 0px;
