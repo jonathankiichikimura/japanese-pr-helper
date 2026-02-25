@@ -1,7 +1,6 @@
 class ChatsController < ApplicationController
   before_action :set_user_application, only: %i[show create destroy]
   def show
-    # @chat = @user_application.chats.first
     @chats = @user_application.chats.order(done: :asc, created_at: :desc)
     @chat = @user_application.chats.find_by(id: params[:id])
 
