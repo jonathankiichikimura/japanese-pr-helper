@@ -13,6 +13,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
+    @message.chat = @chat
+    @message.role = "user"
 
     if @message.save
       llm_response
@@ -89,7 +91,5 @@ class MessagesController < ApplicationController
   # Unrelated to above / setting message_params to avoid unwanted columns
   def message_params
     params.require(:message).permit(:content)
-    @message.chat = @chat
-    @message.role = "user"
   end
 end
