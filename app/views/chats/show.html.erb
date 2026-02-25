@@ -41,11 +41,14 @@
   </aside>
 
 
-  <div class="message-details-container b-only">
+  <div class="message-details-container">
     <div class="row">
       <div class="top-container d-flex ">
        <h3 class="top-container-title text-center col-10"><%= @chat.title %></h3>
-        <div class="top-container-button spare-container col-2"></div>
+        <div class="top-container-button spare-container d-flex col-2 justify-content-evenly">
+            <i class="fa-solid fa-thumbtack fa-2xl mt-4"></i>
+            <i class="fa-solid fa-file fa-2xl mt-4"></i>
+        </div>
       </div>
     </div>
 
@@ -61,8 +64,11 @@
     </div>
 </div>
 
-    <div class="message-upload-container b-only">
-      Type:
+    <div class="message-upload-container">
+      <div class="send-and-upload">
+        <i class="fa-solid fa-file-arrow-up fa-xl"></i>
+        <i class="fa-regular fa-paper-plane fa-xl"></i>
+      </div>
     </div>
 
 
