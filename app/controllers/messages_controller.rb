@@ -104,12 +104,16 @@ class MessagesController < ApplicationController
   # 7- Sending question to and receiving answer from the llm
   def llm_response
     build_chat_history
-    response = @ruby_llm_chat.with_instructions(set_context).ask(@message.content)
+    if @message.file.attached?
+      response = @ruby_llm_chat.with_instructions(set_context).ask(@message.content, with: { pdf: @message.file })
+    else
+      response = @ruby_llm_chat.with_instructions(set_context).ask(@message.content)
+    end
     Message.create(role: "assistant", content: response.content, chat: @chat)
   end
 
   # Unrelated to above / setting message_params to avoid unwanted columns
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :file)
   end
 end
