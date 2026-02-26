@@ -48,6 +48,7 @@ gem "sassc-rails"
 gem "devise"
 gem "ruby_llm"
 gem "cloudinary"
+gem "rubyXL"
 
 gem "kramdown"
 gem "rouge"
