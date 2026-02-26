@@ -10,8 +10,6 @@
     <%= simple_form_for [user_application, chat], url: user_application_chat_path(user_application, chat), method:
       :patch, data: { turbo: true } do |f| %>
 
-
-
       <%= f.input :done,
       as: :boolean,
       label: false,
