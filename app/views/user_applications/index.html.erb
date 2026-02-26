@@ -7,7 +7,7 @@
 
     <% @user_applications.each do |user_application| %>
       <%= link_to user_application_chat_path(user_application, user_application.chats.last), class: "app" do %>
-        <div class="app-title"><%= user_application.title %> <br>
+        <div class="app-title nextlineVertwo"><%= user_application.title %> <br>
           Create at: <%= user_application.created_at %>
         </div>
       <% end %>
