@@ -55,20 +55,12 @@
 
     <div class="messages-container">
       <div id="messages">
-      <% @chat.messages.order(:created_at).each do |message| %>
-        <div class="message b-only <%= message.role == 'user' ? 'right' : 'left' %>">
-          <%# <p> message.role  :</p> %>
-          <p> <%= message.content %></p>
-        </div>
-      <% end %>
+
     </div>
 </div>
 
     <div class="message-upload-container">
-      <div class="send-and-upload">
-        <i class="fa-solid fa-file-arrow-up fa-xl"></i>
-        <i class="fa-regular fa-paper-plane fa-xl"></i>
-      </div>
+
     </div>
 
 
