@@ -1,0 +1,51 @@
+.message-form {
+  width: 100%;
+
+  form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  textarea {
+    resize: none;
+    overflow-y: hidden;
+  }
+}
+
+.message-form .message-form-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.message-form-content .form-control {
+  width: 100%;
+  border-radius: 30px;
+}
+
+.message-form-file input[type="file"]::file-selector-button {
+  color: #fff;
+  background: #0D6EFD;
+  border: 1px solid #6c757d;
+  border-radius: .375rem;
+  padding: .375rem .75rem;
+  cursor: pointer;
+}
+
+.message-form-file input[type="file"]:hover::file-selector-button {
+  background-color: #0b5ed7 !important;
+  border-color: #0a58ca !important;
+}
+
+
+.send-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+  background-image: image-url("send.png");
+}
