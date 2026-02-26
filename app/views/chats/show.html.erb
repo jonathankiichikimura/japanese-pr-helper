@@ -1,36 +1,35 @@
-<div class="chat-main-container d-flex">
+<div class="chat-main-container b-only d-flex">
 
 
-  <aside class="sidebar-container">
-    <div class="username-container text-center">
-      <%= link_to user_applications_path(user_id: current_user.id), class: "text-decoration-none" do %>
+  <aside class="sidebar-container b-only">
+    <div class="username-container b-only">
       <h3>
+        <%= link_to new_user_application_path do %><i class="fa-solid fa-file-circle-plus"></i><% end %>
+
         <%= @chat.user_application.user.first_name %>
         <%= @chat.user_application.user.last_name %>
       </h3>
-      <% end %>
+      <h5>Chat ID: <%= @chat.id %></h5>
       <p>
-        Application:
-        <strong><%= @chat.user_application.title %> </strong>
+        <strong>Application: </strong>
+        <%= @chat.user_application.title %>
       </p>
     </div>
 
 
-    <div class="new-chat-container">
+    <div class="new-chat-container b-only">
       <%= simple_form_for [@user_application, @newchat],
                           data: { turbo_method: :post } do |f| %>
         <%= f.input :title,
                     placeholder: "New Chat",
                     label: false,
-                    wrapper: false,
-                    input_html: { class: "rounded-5" }
-                    %>
+                    wrapper: false %>
         <%= f.button :submit, "+", class: "send_button" %>
       <% end %>
     </div>
 
 
-    <div id="chatboxs-container" class="chatboxs-container" >
+    <div id="chatboxs-container" class="chatboxs-container b-only" >
     <% @chats.each do |chat| %>
     <%= render "chat_row", chat: chat,
                          user_application: @user_application %>
@@ -38,29 +37,25 @@
 </div>
 
 
+
   </aside>
 
 
-  <div class="message-details-container">
-    <div class="row row-chat">
-      <div class="top-container d-flex ">
-       <h3 class="top-container-title text-center col-10"><%= @chat.title %></h3>
-        <div class="top-container-button spare-container d-flex col-2 justify-content-evenly">
-            <i class="fa-solid fa-thumbtack fa-2xl mt-4"></i>
-            <i class="fa-solid fa-file fa-2xl mt-4"></i>
-        </div>
+
+  <div class="message-details-container b-only">
+    <div class="top-container b-only text-center">
+      <%= @chat.title %>
+    </div>
+
+
+    <div class="messages-container b-only">
+      <div id="messages">
+        <%= render "messages/messages", messages: @chat.messages %>
       </div>
     </div>
 
-
-    <div class="messages-container">
-      <div id="messages">
-
-    </div>
-</div>
-
-    <div class="message-upload-container">
-
+    <div id="new_message" class="message-upload-container b-only">
+      <%= render "messages/form", chat: @chat, message: @message %>
     </div>
 
 
