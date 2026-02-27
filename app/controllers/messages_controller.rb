@@ -43,20 +43,44 @@ class MessagesController < ApplicationController
 
   # 2- start the chat with llm
   def build_llm
-    @ruby_llm_chat = RubyLLM.chat(model: 'gpt-5-mini')
+    @ruby_llm_chat = RubyLLM.chat
   end
 
   # 3- intructions to summarize chat_history (used in the next method)
   def summarize_instructions
     <<~PROMPT
-      Objective: prepare a summary of chat history.
-      Details: the current chat history is about to be destroyed and replaced with the returned summary of this ask.
-      Token capability is reaching limit and there is no option but to replace the chat history with a summary.
-      Prepare a summary as detailed as possible and as long as possible, desired token usage is 30,000 tokens (no more, no less).
-      Keep key information provided by the user as profile information to be displayed at the top of the summary.
-      After profile info, 2nd priority is to keep user input as much as possible (unless not relevant to the context of Japanese PR visa application).
-      Final priority is to keep relevant information as much as possible, both from AI assistant and user.
-      The result is to be interpreted by AI and will not be displayed to humans, so please feel free to optimize for AI context.
+      You are summarizing a conversation about a Japanese Permanent Residency (PR) application.
+      The original chat history will be replaced by this summary. The summary will be used as AI context only and will not be shown to users.
+      Goal:
+      Preserve all important information required to continue assisting the user with their PR application.
+      Instructions:
+      1. Extract and place USER PROFILE INFORMATION at the top when available:
+        - visa category or application type
+        - residency status
+        - employment situation
+        - family or marital status if relevant
+        - important dates or deadlines
+        - any stated concerns or constraints.
+      2. Preserve USER PROVIDED INFORMATION with high priority.
+        Prefer keeping user statements verbatim when useful.
+      3. Preserve ASSISTANT INFORMATION only when it contains actionable instructions or important conclusions.
+      4. Remove:
+        - greetings
+        - repetition
+        - unrelated conversation.
+      Output format:
+      --CHAT SUMMARY--
+      USER PROFILE
+      (concise structured facts)
+      APPLICATION CONTEXT
+      (main situation summary)
+      IMPORTANT USER INPUT
+      (key statements and constraints)
+      ACTIONABLE GUIDANCE
+      (instructions already provided or decisions made)
+      Keep the summary detailed but efficient.
+      Avoid filler text.
+      Use plain text formatting only.
     PROMPT
   end
 
@@ -64,7 +88,7 @@ class MessagesController < ApplicationController
   # just to make sure the app wont unexpectedly fail, very simple implementation
   def summarize_chat
     recent_messages = @chat.messages.order(:created_at).last(20)
-    summary = @ruby_llm_chat.with_instructions(summarize_instructions).ask(recent_messages)
+    summary = @ruby_llm_chat.with_model('gpt-5-nano').with_instructions(summarize_instructions).ask(recent_messages)
     # I'm not sure if the line below would work, but Chappy says it should.
     @chat.messages.destroy(recent_messages)
     @ruby_llm_chat.add_message(summary)
@@ -91,13 +115,30 @@ class MessagesController < ApplicationController
   def set_context
     @application_journey = @chat.user_application.application_journey
     <<~PROMPT
-      Japanese permanent visa application, type/category: #{@application_journey.description}.
-      The type of permanent visa application is: #{@application_journey.system_prompt}.
-      Need help acquiring #{@chat.system_prompt} related documents for the application.
-      Keep objective to application. Minimize unnecessary interactions. Keep text formation minimalistic.
-      Start the answer with an ordered TO DO list if applicable.
-      If the asked information is not related to Japanese permanent visa application and its relevant documents,
-      please simply reply with "Please refrain from making unrelated questions/requests"
+      You are assisting a user preparing a Japanese Permanent Residency (PR) application.
+      Application category:
+      #{@application_journey.description}
+      Application system:
+      #{@application_journey.system_prompt}
+      Current chat topic:
+      Helping the user obtain and prepare the following document:
+      #{@chat.system_prompt}
+      Guidelines:
+      - Focus only on information relevant to the PR application and required documents.
+      - Provide practical and actionable instructions.
+      - Avoid unnecessary conversation or filler text.
+      - Prefer concise explanations.
+      Response structure:
+      - Begin with an ordered TO DO list when applicable.
+      - Then provide explanations or cautions if needed.
+      Language rules:
+      - Detect the language used by the user in their most recent message.
+      - Reply entirely in that same language.
+      - Do not switch languages unless the user explicitly changes language.
+      - Official Japanese document names may remain in Japanese when necessary.
+      If the user's language is unclear, default to the language previously used in the conversation.
+      If the user asks something clearly unrelated to the PR application or required documents, reply as below following language rules:
+      "This assistant only supports Japanese PR application related questions and required documents."
     PROMPT
   end
 
