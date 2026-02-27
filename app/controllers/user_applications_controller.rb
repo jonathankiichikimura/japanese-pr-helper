@@ -256,41 +256,7 @@ class UserApplicationsController < ApplicationController
       chat = Chat.new(title: title.gsub(" (", "\n("), system_prompt: title)
       chat.user_application = user_application
       chat.save
-      initial_messages(chat)
     end
-  end
-
-  def initial_context(chat)
-    <<~PROMPT
-      You are an assistant helping users prepare a Japanese Permanent Residency (PR) application.
-      A new application has just been created. A dedicated chat exists for each required document.
-      Your task is to generate the FIRST message of the chat.
-      Using the application details provided as context, explain:
-      1. What this document is.
-      2. Why it is required for the PR application.
-      3. The main steps required to obtain it.
-      4. Important cautions or common difficulties if relevant.
-      Guidelines:
-      - Be concise and practical.
-      - Prioritize actionable information.
-      - Avoid greetings, emojis, or conversational filler.
-      - Do not use decorative language.
-      - Use plain text formatting, except for:
-        - A clear title
-        - Short subtitles when helpful
-        - Bullet point lists.
-      The response should feel like a professional instruction guide.
-      Additional context about the application:
-      #{chat.system_prompt}
-      #{chat.user_application.application_journey.system_prompt}
-      #{chat.user_application.application_journey.description}
-    PROMPT
-  end
-
-  def initial_messages(chat)
-    @ruby_llm_chat = RubyLLM.chat
-    response = @ruby_llm_chat.ask(initial_context(chat))
-    Message.create(role: "assistant", content: response.content, chat: chat)
   end
 
   def user_application_params
