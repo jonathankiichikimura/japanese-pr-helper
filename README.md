@@ -1,4 +1,4 @@
-# PR Helper
+# PR Tomo
 
 A Rails web application that helps users navigate the Japanese Permanent Residency (PR) application process by organizing required documents, structuring guidance into section-based chats, and generating AI-assisted support per eligibility route.
 
